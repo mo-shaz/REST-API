@@ -4,7 +4,7 @@
     <body>
         <h1><center>API End-points and Instructions</center></h1>
         <div>
-            <ul>> POST to <mark>/api/register</mark> to create an account in the form:
+            <ul>> POST to <mark>https://frame-factr-login.herokuapp.com//api/register</mark> to create an account in the form:
                 <code>
                 {
                 "username": name,
@@ -12,7 +12,7 @@
                 "password": password
                 }
                 </code> </ul>
-                <ul>> POST to <mark>/api/login</mark> to login to the created account and receive an auth token, request form:
+                <ul>> POST to <mark>https://frame-factr-login.herokuapp.com//api/login</mark> to login to the created account and receive an auth token, request form:
                 <code>
                 {
                 "username": name,
@@ -20,7 +20,7 @@
                 }
                 </code></ul>
             <ul>> Copy the given auth token in the form: <strong>BEARER /AUTH_TOKEN/</strong> in order to access the user details. </ul>
-            <ul>> GET to <mark>/api/users</mark> with the copied token in the <strong>'Authorization'</strong> field of the <strong>header</strong> to access the user details. </ul>
+            <ul>> GET to <mark>https://frame-factr-login.herokuapp.com//api/users</mark> with the copied token in the <strong>'Authorization'</strong> field of the <strong>header</strong> to access the user details. </ul>
         </div>
     </body>
 </html>
