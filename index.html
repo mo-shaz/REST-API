@@ -1,12 +1,26 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Title of the document</title>
-</head>
-<body>
-
-<h1>Welcome to DAX</h1>
-<p>Hope this shit works.</p>
-
-</body>
-</html> 
+<!DOCTYPE html>
+<html>
+    <title> API </title>
+    <body>
+        <h1><center>API End-points and Instructions</center></h1>
+        <div>
+            <ul>> POST to <mark>/api/register</mark> to create an account in the form:
+                <code>
+                {
+                "username": name,
+                "email": mail,
+                "password": password
+                }
+                </code> </ul>
+                <ul>> POST to <mark>/api/login</mark> to login to the created account and receive an auth token, request form:
+                <code>
+                {
+                "username": name,
+                "password": password
+                }
+                </code></ul>
+            <ul>> Copy the given auth token in the form: <strong>BEARER /AUTH_TOKEN/</strong> in order to access the user details. </ul>
+            <ul>> GET to <mark>/api/users</mark> with the copied token in the <strong>'Authorization'</strong> field of the <strong>header</strong> to access the user details. </ul>
+        </div>
+    </body>
+</html>
