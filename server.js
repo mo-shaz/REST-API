@@ -68,6 +68,20 @@ const JoiLogSchema = Joi.object({
 
 })
 
+const JoiPutSchema = Joi.object({
+
+    username: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(30),
+
+    password: Joi.string()
+    .min(6)
+    .max(30)
+
+})
+
+
 // JWT Authentication
 function authenticateToken(req, res, next) {
 
@@ -79,6 +93,7 @@ function authenticateToken(req, res, next) {
     } else {
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (err) return res.send('ACCESS DENIED')
+            req.decoded = decoded
             next()
         })
         }
@@ -160,6 +175,38 @@ app.get('/api/users', authenticateToken, (req, res) => {
     })
 
 })
+
+// Updating user details
+app.put('/api/update', authenticateToken, (req, res) => {
+
+    let mail = req.decoded.email
+
+    let data = JoiPutSchema.validate(req.body)
+    if ('error' in data) {
+        return res.json(data.error.details[0].message)
+    } else if (Object.keys(req.body).length === 0) {
+        res.json({error: "no data to update"})
+    } else if ('username' in req.body && 'password' in req.body) {
+        let hash = bcrypt.hashSync(req.body.password, 8)
+        User.findOneAndUpdate({email: mail}, {username: req.body.username, password: hash}, (err, doc) => {
+            if (err) return console.error(err), res.status(500).send('server error, try again')
+            res.status(200).send('name and password changed successfully')
+        })
+    } else if ('username' in req.body) {
+        User.findOneAndUpdate({email: mail}, {username: req.body.username}, (err, doc) => {
+            if (err) return console.error(err), res.status(500).send('server error, try again')
+            res.status(200).send('username changed successfully')
+        })
+    } else {
+        let hash = bcrypt.hashSync(req.body.password, 8)
+        User.findOneAndUpdate({email: mail}, {password: hash}, (err, doc) => {
+            if (err) return console.error(err), res.status(500).send('server error, try again')
+            res.status(500).send('password changed successfully')
+        })
+    }
+})
+
+
 
 
 app.listen(process.env.PORT || 3000, () => {
