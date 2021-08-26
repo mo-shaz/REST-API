@@ -124,7 +124,7 @@ app.post('/api/register', (req, res) => {
                          joinDate: data.joinDate
                      }
                 return res.json(cleaned)
-                })``
+                })
             } else {
                 res.json({'error': 'User with the email already exist. Try another email.'})
             }
