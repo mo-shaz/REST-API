@@ -2,9 +2,11 @@
 <html>
     <title> API </title>
     <body>
-        <h1><center>API End-points and Instructions</center></h1>
-        <div>
-            <ul>> POST to <mark>https://shellcorp-api.herokuapp.com/api/register</mark> to create an account in the form:<br>
+        <h1><center>CRUD API</center></h1>
+        <h2><center>Implemented on a Login and Register System</center></h2>
+        <h3><center>API End-points and Instructions</center></h3>
+        <section>
+            <ul>> POST (CREATE) to <mark>https://shellcorp-api.herokuapp.com/api/register</mark> to create an account in the form:<br>
                 <code>
                 {
                 "username": name,
@@ -12,15 +14,37 @@
                 "password": password
                 }
                 </code> </ul>
-                <ul>> POST to <mark>https://shellcorp-api.herokuapp.com/api/login</mark> to login to the created account and receive an auth token, request form:<br>
+                <ul>> POST (READ) to <mark>https://shellcorp-api.herokuapp.com/api/login</mark> to login to the created account and receive an AuthToken, request form:<br>
                 <code>
                 {
-                "username": name,
-                "password": password
+                "email": your_name,
+                "password": your_password
                 }
                 </code></ul>
-            <ul>> Copy the given auth token in the form: <strong>BEARER /AUTH_TOKEN/</strong> in order to access the user details. </ul>
-            <ul>> GET to <mark>https://shellcorp-api.herokuapp.com/api/users</mark> with the copied token in the <strong>'Authorization'</strong> field of the <strong>header</strong> to access the user details. </ul>
-        </div>
+            <ul>> Copy the given AuthToken in the form: <strong>BEARER /AUTH_TOKEN/</strong> in order to access the user details. </ul>
+            <ul>> PUT (UPDATE) to <mark>https://shellcorp-api.herokuapp.com/api/update</mark> with the given AuthToken in the header field to change/update either the username or password of the account or both. The request body should be in the form:<br>
+            <code>
+                {
+                "username": new_name,
+                "password": new_password
+                }
+            </code>
+            </ul>
+            <ul>> DELETE Method require Admin privilege. To do that, just login using the credentials <br>
+            <code>
+                {
+                "email": "admin@shell.com",
+                "password": "adminhere"
+                } 
+            </code> <br>
+            Now you can use the DELETE method on the url <mark>https://shellcorp-api.herokuapp.com/delete</mark> with the received AuthToken in the authorization field of the header to delete any account by composing the request body in the form <br>
+            <code>
+                {
+                "email": target_mail
+                }
+            </code>
+            </ul>
+            <ul>> You can also GET (ADMIN READ) to <mark>https://shellcorp-api.herokuapp.com/users</mark> with the recieved admin AuthToken to access the details of every user in the database. </ul>
+        </section>
     </body>
 </html>
