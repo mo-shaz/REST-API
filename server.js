@@ -81,7 +81,6 @@ const JoiPutSchema = Joi.object({
 
 })
 
-
 // JWT Authentication
 function authenticateToken(req, res, next) {
 
@@ -89,10 +88,10 @@ function authenticateToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1]
 
     if (!token) {
-        return res.status(401).send('ACCESS DENIED')
+        return res.status(401).send('!! ACCESS DENIED !!')
     } else {
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
-            if (err) return res.send('ACCESS DENIED')
+            if (err) return res.send('!! ACCESS DENIED !!')
             req.decoded = decoded
             next()
         })
@@ -125,7 +124,7 @@ app.post('/api/register', (req, res) => {
                          joinDate: data.joinDate
                      }
                 return res.json(cleaned)
-                })
+                })``
             } else {
                 res.json({'error': 'User with the email already exist. Try another email.'})
             }
@@ -157,10 +156,32 @@ app.post('/api/login', (req, res) => {
     }
 })
 
+// Get single user details
+app.get('/api/users/:id', authenticateToken, (req, res) => {
+
+    let ad_mail = req.decoded.email
+
+    if (ad_mail === 'admin@shell.com') {
+        User.findOne({email: req.params.id}, (err, doc) => {
+            if (err) return console.error(err), res.status(500).send('server error, try again')
+            if (doc === null) {
+                res.status(404).send('No such user found')
+            } else {
+                res.status(200).send(doc)
+            }
+        })
+    } else {
+        res.status(401).send('!! ACCESS DENIED. ADMIN ACCESS ONLY !!')
+    }
+})
+
 // GET the users with the token
 app.get('/api/users', authenticateToken, (req, res) => {
 
-    User.find({}, (err, data) => {
+    let mail = req.decoded.email
+
+    if (mail === 'admin@shell.com') {
+        User.find({}, (err, data) => {
         if (err) return console.error(err)
         let data_arr = []
         data.forEach(function (item) {
@@ -173,7 +194,9 @@ app.get('/api/users', authenticateToken, (req, res) => {
 
         res.send(data_arr)
     })
-
+    } else {
+        res.status(401).send('!! ACCESS DENIED. ADMIN ACCESS ONLY !!')
+    }
 })
 
 // Updating user details
@@ -206,6 +229,29 @@ app.put('/api/update', authenticateToken, (req, res) => {
     }
 })
 
+// Deleting users
+app.delete('/api/users/:id', authenticateToken, (req, res) => {
+
+    let ad_mail = req.decoded.email
+    let tr_mail = req.params.id
+
+    if (tr_mail === ad_mail) {
+        res.status(403).send('!! FORBIDDEN. CANNOT DELETE ADMIN !!')
+    } else {
+        if (ad_mail === 'admin@shell.com') {
+            User.deleteOne({email :tr_mail}, (err, doc) => {
+                if (err) console.error(err)
+                if (doc.deletedCount === 0) {
+                    res.status(404).send('No such user found')
+                } else {
+                    res.status(200).send(`User with email ${req.params.id} successfully deleted.`)
+                }
+            })
+        } else {
+            res.status(401).send('!! ACCESS DENIED, ADMIN ACCESS ONLY !!')
+        }
+    }
+})
 
 
 
