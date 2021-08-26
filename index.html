@@ -8,18 +8,20 @@
         <section>
 
             <details>
-                <summary> POST (CREATE) to <mark>https://shellcorp-api.herokuapp.com/api/register</mark> to create an account in the form:</summary>
+                <summary> <i>POST</i> (CREATE) to <b>https://shellcorp-api.herokuapp.com/api/register</b> to create an account in the form:</summary>
                 <p>
+                <code>
                 {<br>
                 "username": name,<br>
                 "email": mail,<br>
                 "password": password<br>
                 }
+                </code>
                 </p>
             </details>
 
                 <details>
-                    <summary> POST (READ) to <mark>https://shellcorp-api.herokuapp.com/api/login</mark> to login to the created account and receive an AuthToken, request form:</summary>
+                    <summary> <i>POST</i> (READ) to <b>https://shellcorp-api.herokuapp.com/api/login</b> to login to the created account and receive an AuthToken, request form:</summary>
                     <p>
                     <code>
                     {<br>
@@ -28,11 +30,11 @@
                     }
                     </code>
                     </p>
-                    <p> Copy the given AuthToken in the form: <strong>BEARER /AUTH_TOKEN/</strong>. This is needed for later use. </p>
+                    <p> Copy the given AuthToken in the form: <b><i>BEARER /AUTH_TOKEN/</i></b>. This is needed for later use. </p>
                 </details>
 
                 <details>
-                    <summary> PUT (UPDATE) to <mark>https://shellcorp-api.herokuapp.com/api/update</mark> with the given AuthToken in the header field to change/update either the username or password of the account or both. The request body should be in the form:</summary>
+                    <summary> <i>PUT</i> (UPDATE) to <b>https://shellcorp-api.herokuapp.com/api/update</b> with the given AuthToken in the header field to change/update either the username or password of the account or both. The request body should be in the form:</summary>
                 <p>
                 <code>
                 {<br>
@@ -44,7 +46,7 @@
                 </details>
                 
                 <details>
-                    <summary> DELETE Method require Admin privilege. To do that, just login using the credentials </summary>
+                    <summary> <i>DELETE</i> Method require Admin privilege. To do that, just login on <b>https://shellcorp-api.herokuapp.com/api/login</b> using the credentials </summary>
                 <p>
                 <code>
                 {<br>
@@ -52,7 +54,7 @@
                 "password": "adminhere"<br>
                 } 
                 </code>
-                <p> Use DELETE method on the url <mark>https://shellcorp-api.herokuapp.com/delete</mark> with the received AuthToken in the authorization field of the header to delete any account by composing the request body in the form <br>
+                <p> Use <i>DELETE</i> method on the url <b>https://shellcorp-api.herokuapp.com/api/delete</b> with the received AuthToken in the authorization field of the header to delete any account by composing the request body in the form <br>
             <code>
                 {<br>
                 "email": target_mail<br>
@@ -60,7 +62,7 @@
             </code></p>
             </details>
             <details>
-                <summary> You can also GET (ADMIN READ) to <mark>https://shellcorp-api.herokuapp.com/users</mark> with the recieved admin AuthToken to access the details of every user in the database.</summary>
+                <summary> You can also use <i>GET</i> method (ADMIN READ) to <b>https://shellcorp-api.herokuapp.com/api/users</b> with the recieved admin AuthToken to access the details of every user in the database.</summary>
                     </details>
         </section>
     </body>
