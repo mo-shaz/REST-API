@@ -28,6 +28,7 @@ a {
             <details>
                 <summary> <i>POST</i> (CREATE) to <b><a href=#>https://shellcorp-api.herokuapp.com/api/register</a></b> to create an account in the form:</summary>
                 <p>
+                <blockquote>
                 <code>
                 {<br>
                 "username": name,<br>
@@ -35,45 +36,55 @@ a {
                 "password": password<br>
                 }
                 </code>
+                </blockquote>
                 </p>
             </details>
+            <br>
 
                 <details>
                     <summary> <i>POST</i> (READ) to <b><a href=#>https://shellcorp-api.herokuapp.com/api/login</a></b> to login to the created account and receive an AuthToken, request form:</summary>
                     <p>
+                    <blockquote>
                     <code>
                     {<br>
                     "email": your_name,<br>
                     "password": your_password<br>
                     }
                     </code>
+                    </blockquote>
                     </p>
                     <p> Copy the given AuthToken in the form: <b><i>BEARER /AUTH_TOKEN/</i></b>. This is needed for later use. </p>
                 </details>
+                <br>
 
                 <details>
                     <summary> <i>PUT</i> (UPDATE) to <b><a href=#>https://shellcorp-api.herokuapp.com/api/update</a></b> with the given AuthToken in the header field to change/update either the username or password of the account or both. The request body should be in the form:</summary>
                 <p>
+                <blockquote>
                 <code>
                 {<br>
                 "username": new_name,<br>
                 "password": new_password<br>
                 }
                 </code>
+                </blockquote>
                 </p>
                 </details>
-                
+                <br>
                 <details>
                     <summary> <i>DELETE</i> Method require Admin privilege. To do that, just login on <b><a href=#>https://shellcorp-api.herokuapp.com/api/login</a></b> using the credentials </summary>
                 <p>
+                <blockquote>
                 <code>
                 {<br>
                 "email": "admin@shell.com",<br>
                 "password": "adminhere"<br>
                 } 
                 </code>
+                </blockquote>
                 <p> Use <i>DELETE</i> method on the url <b><a href=#>https://shellcorp-api.herokuapp.com/api/users/target-email</a></b> with the received admin AuthToken in the authorization field of the header. Make sure to add the complete mail address on the <b><i>target-email</i></b> field.</p>
             </details>
+            <br>
             <details>
                 <summary> You can also use <i>GET</i> method (ADMIN READ) to <b><a href=#>https://shellcorp-api.herokuapp.com/api/users</a></b> with the recieved admin AuthToken to access the details of every user in the database. Further, you can access single user details by specifying their email in the URL in the form: <b><a href=#>https://shellcorp-api.herokuapp.com/api/users/target-email</a><b></summary> 
                     </details>
