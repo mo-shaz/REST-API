@@ -1,4 +1,4 @@
-# ShellCorp-API
+# REST-API
 A basic RESTful CRUD API implemented using Node.js, Express.js and MongoDB
 
 This is done as a part of my web developement journey while learning JavaScript and Node.js
